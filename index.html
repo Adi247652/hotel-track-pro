@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotelTrackPro - Luxury Management & Stay Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-blue: #0A369D;
+            --sidebar-grad-start: rgba(0, 34, 122, 0.85);
+            --sidebar-grad-end: rgba(0, 18, 66, 0.95);
+            --white: #FFFFFF;
+            --text-dark: #1C2434;
+            --text-muted: #64748B;
+            --border-color: rgba(226, 232, 240, 0.3);
+            --input-bg: rgba(248, 250, 252, 0.9);
+            --success-green: #10B981;
+            --warning-orange: #F59E0B;
+            --danger-red: #EF4444;
+            --premium-wallpaper: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1920&auto=format&fit=crop');
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            min-height: 100vh;
+            background-color: #030712;
+            overflow-x: hidden;
+            width: 100vw;
+        }
+
+        /* --- EFFECTS ANIMATIONS KEYFRAMES --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes badgeGlow {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        @keyframes hskPulse {
+            0% { opacity: 0.4; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.4; transform: scale(0.9); }
+        }
+
+        /* --- 1. FULL-WIDTH LANDING PAGE VIEW WITH INTEGRATED PREMIUM WATERFALL DESIGN --- */
+        .home-page-view {
+            width: 100%;
+            min-height: 100vh;
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(rgba(13, 21, 39, 0.6), rgba(3, 5, 12, 0.92)), var(--premium-wallpaper);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .home-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(13, 21, 39, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1500;
+            width: 100%;
+        }
+
+        .home-nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .home-nav .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .home-nav .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .btn-portal {
+            background: linear-gradient(135deg, var(--primary-blue), #1e40af);
+            color: var(--white) !important;
+            padding: 12px 26px;
+            border-radius: 24px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 14px rgba(10, 54, 157, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+
+        .btn-portal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10, 54, 157, 0.6);
+        }
+
+        .hero-section {
+            padding: 120px 5% 100px 5%;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 60px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, #ffffff 60%, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            line-height: 1.65;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary-lg {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(10, 54, 157, 0.4);
+            transition: all 0.2s;
+        }
+
+        .btn-primary-lg:hover {
+            background-color: #0e43c5;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-lg {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.2s;
+        }
+
+        .btn-outline-lg:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--white);
+        }
+
+        .hero-graphic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mock-dashboard-preview {
+            width: 100%;
+            max-width: 550px;
+            background: rgba(13, 21, 39, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+
+        .mock-header { display: flex; gap: 8px; margin-bottom: 24px; }
+        .mock-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mock-row { height: 14px; background: rgba(255, 255, 255, 0.12); margin-bottom: 14px; border-radius: 4px; }
+
+        /* ENABLED AND STYLED: HOME SYSTEM FEATURES SECTION */
+        .home-features {
+            padding: 100px 5%;
+            background: rgba(6, 10, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            scroll-margin-top: 80px;
+        }
+
+        .section-title-center {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title-center h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title-center p {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-item-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 40px 32px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-item-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .feature-item-card i {
+            font-size: 36px;
+            color: #60a5fa;
+            margin-bottom: 24px;
+        }
+
+        .feature-item-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-item-card p {
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ENABLED AND STYLED: HOME SYSTEM SOLUTIONS MODULE */
+        .home-solutions {
+            padding: 100px 5%;
+            background: rgba(4, 7, 16, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            scroll-margin-top: 80px;
+        }
+
+        .solutions-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .sol-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .sol-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .sol-item-icon {
+            background: rgba(10, 54, 157, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #60a5fa;
+        }
+
+        .sol-text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .sol-text p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+        }
+
+        /* ENABLED AND STYLED: HOME SYSTEM CONTACT SECTION */
+        .home-contact {
+            padding: 100px 5%;
+            background: rgba(6, 10, 23, 0.92);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            scroll-margin-top: 80px;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+        }
+
+        .contact-info-panel h3 { font-size: 28px; margin-bottom: 16px; }
+        .contact-info-panel p { color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 30px; }
+        
+        .contact-method-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        .contact-method-row i { font-size: 20px; color: #60a5fa; width: 24px; }
+
+        .contact-glass-form {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .contact-glass-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .contact-glass-form input, .contact-glass-form textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white);
+            padding: 12px 16px;
+            border-radius: 6px;
+            outline: none;
+            margin-bottom: 16px;
+        }
+        .contact-glass-form input:focus, .contact-glass-form textarea:focus {
+            border-color: var(--primary-blue);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .home-footer {
+            padding: 40px 5%;
+            background: #02040a;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            width: 100%;
+        }
+
+        /* --- 2. FULL WINDOW SIZE WORKSPACE INTERNAL GRAPHICS OVERLAY --- */
+        .dashboard-layout {
+            display: none;
+            width: 100vw;
+            min-height: 100vh;
+            background: linear-gradient(rgba(13, 21, 39, 0.5), rgba(13, 21, 39, 0.82)), var(--premium-wallpaper);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .brand-logo-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 60px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sidebar .brand-logo-img { max-height: 50px; margin-bottom: 5px; }
+
+        /* SECURE TERMINAL GATEWAY */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(3, 7, 18, 0.65), rgba(3, 7, 18, 0.9)), var(--premium-wallpaper);
+            background-size: cover;
+            background-position: center;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            width: 440px;
+            padding: 40px;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+        }
+
+        .login-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .auth-toggle {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        .auth-toggle-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .auth-toggle-btn.active {
+            background: var(--white);
+            color: var(--primary-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .login-form-group { text-align: left; margin-bottom: 18px; }
+        .login-form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 13px; }
+        .login-input-wrapper { position: relative; }
+        .login-input-wrapper i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .login-input-wrapper input { width: 100%; padding: 12px 16px 12px 42px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; outline: none; background-color: #f8fafc; font-size: 14px; }
+
+        .btn-login { width: 100%; padding: 14px; background-color: var(--primary-blue); color: var(--white); border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+        .login-back-btn { display: inline-block; margin-top: 20px; font-size: 13px; color: var(--text-muted); text-decoration: none; cursor: pointer; }
+
+        /* --- IMMERSIVE FRAMEWORK SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, var(--sidebar-grad-start) 0%, var(--sidebar-grad-end) 100%);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            padding: 28px 20px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 200;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-container { text-align: center; margin-bottom: 35px; padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+        .logo-sub { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-top: 4px; }
+
+        .nav-menu { list-style: none; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+        .nav-item {
+            cursor: pointer; display: flex; align-items: center; gap: 14px;
+            color: rgba(255, 255, 255, 0.75); padding: 14px 18px; border-radius: 8px;
+            font-weight: 500; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-item:hover { color: var(--white); background-color: rgba(255, 255, 255, 0.1); transform: translateX(6px); }
+        .nav-item.active { background-color: rgba(255, 255, 255, 0.18); color: var(--white); border-left: 4px solid #FFB800; }
+
+        .sidebar-footer { border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 20px; display: flex; align-items: center; justify-content: space-between; }
+        .user-profile-block { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background-color: var(--white); display: flex; align-items: center; justify-content: center; color: var(--primary-blue); font-weight: bold; transition: transform 0.3s ease; }
+        .user-profile-block:hover .avatar { transform: rotate(360deg); }
+        .user-info p { font-size: 14px; font-weight: 600; }
+        .user-info span { font-size: 11px; opacity: 0.6; }
+        .logout-icon-btn { color: rgba(255, 255, 255, 0.6); cursor: pointer; font-size: 18px; background: none; border: none; transition: color 0.2s, transform 0.2s; }
+        .logout-icon-btn:hover { color: var(--danger-red); transform: scale(1.15); }
+
+        /* --- DYNAMIC DASHBOARD MAIN CANVAS --- */
+        .main-content { margin-left: 280px; flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; width: calc(100vw - 280px); }
+        .top-bar {
+            background-color: rgba(255, 255, 255, 0.9); height: 75px; padding: 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .page-title { font-size: 22px; font-weight: 700; color: #0f172a; }
+        .search-box { position: relative; width: 380px; }
+        .search-box input { width: 100%; padding: 12px 16px 12px 42px; border: 1px solid rgba(0,0,0,0.1); border-radius: 24px; background-color: rgba(255,255,255,0.7); outline: none; font-size: 14px; transition: all 0.2s; }
+        .search-box input:focus { border-color: var(--primary-blue); width: 420px; background-color: var(--white); }
+        .search-box i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .header-actions { display: flex; align-items: center; gap: 24px; }
+        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: #475569; }
+        .badge { position: absolute; top: -5px; right: -5px; background-color: var(--danger-red); color: var(--white); font-size: 10px; padding: 2px 6px; border-radius: 10px; animation: badgeGlow 2s infinite ease-in-out; }
+
+        /* TAB RENDERING FRAMEWORKS */
+        .tab-content { display: none; padding: 40px; width: 100%; }
+        .tab-content.active { display: block; }
+
+        /* GLASSMETRIC PANELS WITH HOVER ANIMATION LOGIC */
+        .metric-card { 
+            background-color: rgba(255, 255, 255, 0.88); 
+            border: 1px solid rgba(255,255,255,0.5); 
+            border-radius: 14px; 
+            padding: 24px; 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            backdrop-filter: blur(15px); 
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); 
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+            animation: fadeInUp 0.4s ease forwards;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 35px -5px rgba(0,0,0,0.25);
+        }
+
+        .card { 
+            background-color: rgba(255, 255, 255, 0.92); 
+            border: 1px solid rgba(255,255,255,0.5); 
+            border-radius: 14px; 
+            padding: 28px; 
+            margin-bottom: 28px; 
+            backdrop-filter: blur(15px); 
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.15); 
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        /* Staggered load offsets */
+        .metrics-grid .metric-card:nth-child(1) { animation-delay: 0.05s; }
+        .metrics-grid .metric-card:nth-child(2) { animation-delay: 0.1s; }
+        .metrics-grid .metric-card:nth-child(3) { animation-delay: 0.15s; }
+        .metrics-grid .metric-card:nth-child(4) { animation-delay: 0.2s; }
+        .dashboard-row-1 .card:nth-child(1) { animation-delay: 0.25s; }
+        .dashboard-row-1 .card:nth-child(2) { animation-delay: 0.3s; }
+
+        .form-card { background-color: rgba(255, 255, 255, 0.95); border-radius: 14px; border: 1px solid rgba(255,255,255,0.5); padding: 32px; max-width: 100%; box-shadow: 0 20px 45px rgba(0,0,0,0.2); backdrop-filter: blur(15px); animation: fadeInUp 0.4s ease; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; margin-bottom: 28px; }
+        .metric-icon { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--white); transition: transform 0.3s ease; }
+        .metric-card:hover .metric-icon { transform: scale(1.1) rotate(-8deg); }
+        .icon-blue { background-color: #3B82F6; }
+        .icon-green { background-color: #10B981; }
+        .icon-orange { background-color: #F59E0B; }
+        .icon-purple { background-color: #8B5CF6; }
+        
+        .metric-info span { font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+        .metric-info h3 { font-size: 26px; font-weight: 700; margin: 4px 0; color: #0f172a; }
+        .metric-trend { font-size: 12px; font-weight: 500; }
+        .trend-up { color: var(--success-green); }
+
+        .dashboard-row-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 28px; margin-bottom: 28px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 12px; }
+        .card-title { font-size: 18px; font-weight: 600; color: #0f172a; }
+        .card-header select { padding: 8px 14px; border-radius: 6px; font-size: 13px; border: 1px solid #cbd5e1; }
+
+        .status-flex-container { display: flex; align-items: center; gap: 24px; height: 80%; }
+        .chart-wrapper { position: relative; width: 160px; height: 160px; }
+        .status-legend { display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
+        .legend-item { display: flex; justify-content: space-between; font-size: 14px; }
+        .legend-label { display: flex; align-items: center; gap: 10px; color: var(--text-muted); }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-occupied { background-color: #3B82F6; }
+        .dot-available { background-color: #10B981; }
+        .dot-reserved { background-color: #F59E0B; }
+        .dot-maintenance { background-color: #EF4444; }
+        .legend-val { font-weight: 600; color: #1e293b; }
+
+        /* STRUCTURAL HOUSEKEEPING ASSET MATRICES */
+        .rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 18px; }
+        .room-block { background-color: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.25s ease; position: relative; }
+        .room-block:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); background-color: #f8fafc; }
+        .room-number { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+        .room-class { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .room-badge { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 500; display: inline-block; }
+        .hsk-dot { position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; animation: hskPulse 2s infinite ease-in-out; }
+
+        .dashboard-row-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 28px; }
+        .table-responsive { overflow-x: auto; width: 100%; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+        th { padding: 14px; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid #cbd5e1; background-color: rgba(241, 245, 249, 0.6); }
+        td { padding: 16px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        tr:hover td { background-color: rgba(241, 245, 249, 0.4); }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; display: inline-block; }
+        .delete-btn { background: none; border: none; color: var(--danger-red); cursor: pointer; font-size: 15px; }
+
+        .summary-list { display: flex; flex-direction: column; gap: 18px; }
+        .summary-item { display: flex; justify-content: space-between; align-items: center; font-size: 15px; padding: 4px 0; }
+        .summary-label { display: flex; align-items: center; gap: 14px; color: var(--text-muted); }
+        .summary-val { font-weight: 600; color: #0f172a; }
+
+        /* SYSTEM CORE INPUT STYLINGS */
+        .section-heading { font-size: 16px; font-weight: 600; color: var(--primary-blue); margin-bottom: 24px; padding-bottom: 10px; border-bottom: 2px solid #e2e8f0; display: flex; align-items: center; gap: 10px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 32px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+        input, select, textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; font-size: 14px; background-color: #f8fafc; transition: all 0.25s; }
+        input:focus, select:focus, textarea:focus { border-color: var(--primary-blue); background-color: var(--white); box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.1); transform: translateY(-1px); }
+        .form-actions { display: flex; justify-content: flex-end; gap: 16px; border-top: 1px solid #e2e8f0; padding-top: 24px; }
+        .btn { padding: 14px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .btn-secondary { background-color: #E2E8F0; color: #475569; }
+        .btn-primary { background-color: var(--primary-blue); color: var(--white); }
+
+        .toggle-container { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; transition: .3s; border-radius: 24px; }
+        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--success-green); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* REAL-TIME DIGITAL LEDGER OVERLAYS */
+        .upi-modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.65); display: none; align-items: center; justify-content: center; z-index: 2500; backdrop-filter: blur(5px); }
+        .upi-modal-card { background-color: var(--white); border-radius: 16px; padding: 32px; width: 360px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); animation: fadeInUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .upi-amount { font-size: 28px; font-weight: 700; color: var(--primary-blue); margin-bottom: 20px; }
+        .qr-placeholder { width: 210px; height: 210px; margin: 0 auto 20px auto; border: 1px solid #cbd5e1; padding: 10px; background-color: var(--white); border-radius: 8px; }
+        .qr-placeholder img { width: 100%; height: 100%; }
+        .upi-apps-icons { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; font-size: 13px; color: var(--text-muted); }
+        .upi-status-waiting { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .spinner { animation: spin 1s linear infinite; color: var(--warning-orange); }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="home-page-view" id="homePageView">
+        <nav class="home-nav">
+            <div>
+                <img src="images/log.png" alt="HotelTrackPro" style="max-height:50px; object-fit:contain;">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#contact">Contact Support</a></li>
+                <li><a href="javascript:void(0)" class="btn-portal" onclick="navigateToAuthScreen()">Admin Terminal</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Next-Gen Property Operations Framework</h1>
+                <p>Welcome to HotelTrackPro. Orchestrate real-time guest experiences, audit complex financial ledgers, control structural property room status, and streamline hospitality staffing mechanics from one unified, cloud-optimized workspace layer.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary-lg" onclick="navigateToAuthScreen()">Launch Workspace</button>
+                    <button class="btn-outline-lg" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Explore Framework</button>
+                </div>
+            </div>
+            <div class="hero-graphic">
+                <div class="mock-dashboard-preview">
+                    <div class="mock-header">
+                        <div class="mock-dot" style="background:#ef4444;"></div>
+                        <div class="mock-dot" style="background:#f59e0b;"></div>
+                        <div class="mock-dot" style="background:#10b981;"></div>
+                    </div>
+                    <div class="mock-row" style="width: 45%; height: 22px; background: rgba(59, 130, 246, 0.3); margin-bottom: 24px;"></div>
+                    <div class="mock-row" style="width: 90%;"></div>
+                    <div class="mock-row" style="width: 75%;"></div>
+                    <div class="mock-row" style="width: 85%;"></div>
+                    <div style="display: flex; gap: 14px; margin-top: 24px;">
+                        <div style="flex:1; height: 65px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius:8px;"></div>
+                        <div style="flex:1; height: 65px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius:8px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-features" id="features">
+            <div class="section-title-center">
+                <h2>Integrated Corporate Solutions</h2>
+                <p>Engineered with enterprise-grade operational mechanics to maximize real estate yield, protect asset cashflows, and secure luxury customer service loops.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item-card">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <h3>Live Visual Metrics</h3>
+                    <p>Track occupancy statistics, dynamic daily rates, and revenue generation margins automatically inside high-fidelity charting infrastructure layers.</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <h3>Instant UPI Ledger QR</h3>
+                    <p>Accept digital payments with on-screen generation mechanics, complete with live payment status checking overrides.</p>
+                </div>
+                <div class="feature-item-card">
+                    <i class="fa-solid fa-bed"></i>
+                    <h3>Housekeeping Matrix</h3>
+                    <p>Audit dirty, clean, and scheduled structural room overrides on a high-density, real-time interactive asset deployment grid.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-solutions" id="solutions">
+            <div class="section-title-center">
+                <h2>Property Infrastructure Optimization</h2>
+                <p>Empowering multi-departmental resort and luxury hotel nodes with fluid asset orchestration systems.</p>
+            </div>
+            <div class="solutions-showcase">
+                <div>
+                    <h3 style="font-size: 28px; margin-bottom: 20px;">Built For High-Velocity Hospitality Management</h3>
+                    <p style="color: rgba(255,255,255,0.6); line-height: 1.6;">Our software reconciles front-desk reservations alongside housekeeping pipelines simultaneously. This reduces turn-around latency and optimizes the Average Daily Rate metrics automatically.</p>
+                    <ul class="sol-list">
+                        <li class="sol-item">
+                            <div class="sol-item-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div class="sol-text">
+                                <h4>Unified Audit Trail</h4>
+                                <p>Every transaction entry is saved with granular tracking to prevent financial ledger leakage.</p>
+                            </div>
+                        </li>
+                        <li class="sol-item">
+                            <div class="sol-item-icon"><i class="fa-solid fa-bolt"></i></div>
+                            <div class="sol-text">
+                                <h4>Instant Synchronization</h4>
+                                <p>Room maintenance alerts immediately route assignments to available floor staff rosters.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div style="display:flex; justify-content:center;">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop" alt="Luxury Hotel" style="border-radius:12px; width:100%; max-width:500px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </section>
+
+        <section class="home-contact" id="contact">
+            <div class="section-title-center">
+                <h2>Connect With Support Elements</h2>
+                <p>Have questions regarding configuration setups or enterprise scale options? Our administration team is standby 24/7.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info-panel">
+                    <h3>Direct Communication Nodes</h3>
+                    <p>Reach out directly to corporate channels for expedited assistance regarding server provisioning or offline local network deployment kits.</p>
+                    <div class="contact-method-row">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>management@hoteltrackpro.com</span>
+                    </div>
+                    <div class="contact-method-row">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+1 (800) 555-TRACK</span>
+                    </div>
+                    <div class="contact-method-row">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Tech Hub, Corporate Square, Suite 400</span>
+                    </div>
+                </div>
+                <div class="contact-glass-form">
+                    <form onsubmit="event.preventDefault(); alert('Inquiry logged successfully. Corporate support elements will respond shortly.'); this.reset();">
+                        <div class="form-row">
+                            <input type="text" placeholder="First Name" required>
+                            <input type="text" placeholder="Last Name" required>
+                        </div>
+                        <input type="email" placeholder="Your Administration Email Address" required>
+                        <textarea rows="4" placeholder="Describe operational request or platform query..." required></textarea>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Transmit Secure Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="home-footer">
+            <p>&copy; 2026 HotelTrackPro Inc. All rights reserved globally.</p>
+            <p>System Layer v3.4.1 (Stable Release)</p>
+        </footer>
+    </div>
+
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo-container">
+                <img src="images/log.png" alt="HotelTrackPro" class="brand-logo-img">
+            </div>
+            <div class="login-subtitle" id="authPanelSubtitle">System Administration Terminal</div>
+            
+            <div class="auth-toggle">
+                <button type="button" class="auth-toggle-btn active" id="toggleLoginMode" onclick="setAuthMode('existing')">Sign In</button>
+                <button type="button" class="auth-toggle-btn" id="toggleRegisterMode" onclick="setAuthMode('new')">Create Account</button>
+            </div>
+
+            <form onsubmit="handleAuthEngine(event)">
+                <div class="login-form-group" id="regFullNameGroup" style="display: none;">
+                    <label>Full Administrator Name</label>
+                    <div class="login-input-wrapper">
+                        <i class="fa-solid fa-id-card"></i>
+                        <input type="text" id="regFullName" placeholder="e.g. Sailaja">
+                    </div>
+                </div>
+
+                <div class="login-form-group">
+                    <label>Username / Email</label>
+                    <div class="login-input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="loginUser" placeholder="admin" required value="admin">
+                    </div>
+                </div>
+                
+                <div class="login-form-group">
+                    <label>Password</label>
+                    <div class="login-input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="loginPass" placeholder="••••••••" required value="admin">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-login" id="authSubmitBtn">Secure Authenticate</button>
+            </form>
+            <a class="login-back-btn" onclick="navigateToHomeScreen()"><i class="fa-solid fa-arrow-left"></i> Return to Home Profile</a>
+        </div>
+    </div>
+
+    <div class="dashboard-layout" id="dashboardLayout">
+        <div class="sidebar">
+            <div class="logo-container">
+                <img src="images/log.png" alt="HotelTrackPro" class="brand-logo-img">
+                <div class="logo-sub" id="sidebar-sub-lbl">Hotel Performance Solutions</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="switchTab('dashboard-tab', this)">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </li>
+                <li class="nav-item" onclick="switchTab('booking-tab', this)">
+                    <i class="fa-solid fa-calendar-plus"></i> New Booking
+                </li>
+                <li class="nav-item" onclick="switchTab('reservations-tab', this)">
+                    <i class="fa-solid fa-calendar-check"></i> Reservations
+                </li>
+                <li class="nav-item" onclick="switchTab('guests-tab', this)">
+                    <i class="fa-solid fa-users"></i> Guests
+                </li>
+                <li class="nav-item" onclick="switchTab('rooms-tab', this)">
+                    <i class="fa-solid fa-bed"></i> Rooms
+                </li>
+                <li class="nav-item" onclick="switchTab('transactions-tab', this)">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i> Transactions
+                </li>
+                <li class="nav-item" onclick="switchTab('reports-tab', this)">
+                    <i class="fa-solid fa-file-invoice-dollar"></i> Reports
+                </li>
+                <li class="nav-item" onclick="switchTab('staff-tab', this)">
+                    <i class="fa-solid fa-user-gear"></i> Staff
+                </li>
+                <li class="nav-item" onclick="switchTab('settings-tab', this)">
+                    <i class="fa-solid fa-gear"></i> Settings
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="user-profile-block">
+                    <div class="avatar" id="navAvatarInitials">HA</div>
+                    <div class="user-info">
+                        <p id="navUserProfileName">Hotel Admin</p>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+                <button class="logout-icon-btn" title="Sign Out Securely" onclick="handleLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="page-title" id="dynamic-title">Dashboard Overview</div>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="global-search-input" placeholder="Search data points..." oninput="handleGlobalSearch(this.value)">
+                </div>
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-tab" class="tab-content active">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-blue"><i class="fa-solid fa-wallet"></i></div>
+                        <div class="metric-info"><span>Today Revenue</span><h3 id="stat-revenue">$4,680.00</h3><div class="metric-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +14.5%</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-green"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="metric-info"><span>Total Bookings</span><h3 id="stat-bookings">12</h3><div class="metric-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> Live Tracking</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-orange"><i class="fa-solid fa-users"></i></div>
+                        <div class="metric-info"><span>Check-ins</span><h3>8</h3><div class="metric-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> Stable</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-bed"></i></div>
+                        <div class="metric-info"><span>Occupancy</span><h3>68%</h3><div class="metric-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +5%</div></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-1">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Revenue Overview</div><select><option>This Week</option></select></div>
+                        <div style="height: 220px; width: 100%;"><canvas id="revenueChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Room Status</div></div>
+                        <div class="status-flex-container">
+                            <div class="chart-wrapper"><canvas id="roomChart"></canvas></div>
+                            <div class="status-legend">
+                                <div class="legend-item"><span class="legend-label"><span class="dot dot-occupied"></span>Occupied</span><span class="legend-val">34 (68%)</span></div>
+                                <div class="legend-item"><span class="legend-label"><span class="dot dot-available"></span>Available</span><span class="legend-val">11 (22%)</span></div>
+                                <div class="legend-item"><span class="legend-label"><span class="dot dot-reserved"></span>Reserved</span><span class="legend-val">3 (6%)</span></div>
+                                <div class="legend-item"><span class="legend-label"><span class="dot dot-maintenance"></span>Maintenance</span><span class="legend-val">2 (4%)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-2">
+                    <div class="card" style="animation-delay: 0.35s;">
+                        <div class="card-header"><div class="card-title">Recent Transactions</div></div>
+                        <div class="table-responsive">
+                            <table id="transactions-table">
+                                <thead><tr><th>ID</th><th>Guest Name</th><th>Type</th><th>Amount</th><th>Time</th><th>Payment</th><th>Status</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card" style="animation-delay: 0.4s;">
+                        <div class="card-header"><div class="card-title">Today's Summary</div></div>
+                        <div class="summary-list">
+                            <div class="summary-item"><span class="summary-label"><i class="fa-solid fa-coins"></i> Total Revenue</span><span class="summary-val" id="summary-revenue">$4,680.00</span></div>
+                            <div class="summary-item"><span class="summary-label"><i class="fa-solid fa-book"></i> Total Bookings</span><span class="summary-val" id="summary-bookings">12</span></div>
+                            <div class="summary-item"><span class="summary-label"><i class="fa-solid fa-door-open"></i> Total Check-ins</span><span class="summary-val">8</span></div>
+                            <div class="summary-item"><span class="summary-label"><i class="fa-solid fa-door-closed"></i> Total Check-outs</span><span class="summary-val">5</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="booking-tab" class="tab-content">
+                <form id="bookingForm" class="form-card" onsubmit="handleFormSubmit(event)">
+                    <div class="section-heading"><i class="fa-solid fa-user"></i> Guest Information</div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>First Name</label><input type="text" id="firstName" placeholder="John" required></div>
+                        <div class="form-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Smith" required></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="email" placeholder="john.smith@example.com" required></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000" required></div>
+                    </div>
+
+                    <div class="section-heading"><i class="fa-solid fa-door-open"></i> Room & Stay Details</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Room Type</label>
+                            <select id="roomType" required>
+                                <option value="Deluxe Suite">Deluxe Suite</option>
+                                <option value="Executive Room" selected>Executive Room</option>
+                                <option value="Spa &amp; Dinner">Spa &amp; Dinner package</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Rate Amount</label><input type="number" id="bookingAmount" value="150" min="1" required></div>
+                        <div class="form-group"><label>Check-in Date</label><input type="date" id="checkInDate" required></div>
+                        <div class="form-group"><label>Check-out Date</label><input type="date" id="checkOutDate" required></div>
+                    </div>
+
+                    <div class="section-heading"><i class="fa-solid fa-credit-card"></i> Payment Profile</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select id="paymentMethod">
+                                <option value="Card">Credit/Debit Card</option>
+                                <option value="Cash">Cash</option>
+                                <option value="UPI QR">Digital Wallet / UPI QR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Booking Status</label>
+                            <select id="bookingStatus"><option value="Completed">Completed</option><option value="Pending">Pending</option></select>
+                        </div>
+                        <div class="form-group full-width"><label>Special Notes</label><textarea rows="3" placeholder="Additional details..."></textarea></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('bookingForm').reset()">Reset Form</button>
+                        <button type="submit" class="btn btn-primary">Process Reservation</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="reservations-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header"><div class="card-title">All Active Master Reservations</div></div>
+                    <div class="table-responsive">
+                        <table id="master-reservations-table">
+                            <thead>
+                                <tr><th>ID</th><th>Guest Profile</th><th>Room Allocation</th><th>Check In</th><th>Check Out</th><th>Financials</th><th>Channel</th><th>Action</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guests-tab" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-blue"><i class="fa-solid fa-users"></i></div>
+                        <div class="metric-info"><span>Total Guests</span><h3 id="guest-total-card">4</h3><div class="metric-trend trend-up">Lifetime Profiles</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-crown"></i></div>
+                        <div class="metric-info"><span>VIP Status</span><h3>1</h3><div class="metric-trend trend-up">Premium Tier</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-green"><i class="fa-solid fa-building"></i></div>
+                        <div class="metric-info"><span>Corporate Accounts</span><h3>2</h3><div class="metric-trend">B2B Tracking</div></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><div class="card-title">Guest Master Records</div></div>
+                    <div class="table-responsive">
+                        <table id="guests-directory-table">
+                            <thead>
+                                <tr><th>Guest Profile ID</th><th>Full Name</th><th>Email Contact</th><th>Phone Line</th><th>Total Bookings</th><th>Status Tier</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rooms-tab" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-green"><i class="fa-solid fa-square-check"></i></div>
+                        <div class="metric-info"><span>Clean &amp; Ready</span><h3 id="hsk-clean-count">6</h3><div class="metric-trend trend-up">Inspected</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-orange"><i class="fa-solid fa-broom"></i></div>
+                        <div class="metric-info"><span>Dirty / Pending</span><h3 id="hsk-dirty-count">2</h3><div class="metric-trend">Needs Housekeeping</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-bed"></i></div>
+                        <div class="metric-info"><span>Total Room Units</span><h3>8</h3><div class="metric-trend">Physical Inventory</div></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-1">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Live Property Physical Status Grid</div></div>
+                        <div class="rooms-grid" id="property-rooms-matrix"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Quick Housekeeping Override</div></div>
+                        <div style="display:flex; flex-direction:column; gap:14px;">
+                            <div class="form-group">
+                                <label>Target Room Unit</label>
+                                <select id="hsk-room-select"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Set Housekeeping State</label>
+                                <select id="hsk-state-select">
+                                    <option value="Clean">Clean &amp; Inspected</option>
+                                    <option value="Dirty">Dirty / Turn-Down Required</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" onclick="modifyHousekeepingState()">Apply Shift Override</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="transactions-tab" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-blue"><i class="fa-solid fa-calculator"></i></div>
+                        <div class="metric-info"><span>Gross Transactions</span><h3 id="ledger-gross">$4,680.00</h3><div class="metric-trend trend-up">Combined Channels</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-green"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <div class="metric-info"><span>Cash Settlements</span><h3 id="ledger-cash">$155.00</h3><div class="metric-trend">Physical Counter</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-credit-card"></i></div>
+                        <div class="metric-info"><span>Card / UPI Receipts</span><h3 id="ledger-digital">$4,525.00</h3><div class="metric-trend">Digital Gateway</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-orange"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div class="metric-info"><span>Pending Volume</span><h3 id="ledger-pending">$0.00</h3><div class="metric-trend">Awaiting Verification</div></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><div class="card-title">Master Financial Audit Ledger</div></div>
+                    <div class="table-responsive">
+                        <table id="global-ledger-table">
+                            <thead>
+                                <tr><th>Transaction ID</th><th>Customer Source</th><th>Category Element</th><th>Channel</th><th>Timestamp</th><th>Settled Volume</th><th>Gateway Auditing</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reports-tab" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-calculator"></i></div>
+                        <div class="metric-info"><span>ADR (Avg Daily Rate)</span><h3>$148.50</h3><div class="metric-trend trend-up">Target: $140</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-blue"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="metric-info"><span>RevPAR</span><h3>$101.20</h3><div class="metric-trend trend-up">Optimal Range</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-orange"><i class="fa-solid fa-ban"></i></div>
+                        <div class="metric-info"><span>Cancellations</span><h3>2</h3><div class="metric-trend">This Month</div></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-1">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Monthly Revenue Stream Comparison</div></div>
+                        <div style="height: 250px; width: 100%;"><canvas id="monthlyReportChart"></canvas></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Revenue Distribution</div></div>
+                        <div class="status-flex-container" style="justify-content: center;">
+                            <div class="chart-wrapper" style="width: 180px; height: 180px;"><canvas id="revenueDistributionChart"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="staff-tab" class="tab-content">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon icon-blue"><i class="fa-solid fa-users-gear"></i></div>
+                        <div class="metric-info"><span>Active Staff</span><h3 id="staff-count-card">4</h3><div class="metric-trend trend-up">Registered</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-green"><i class="fa-solid fa-business-time"></i></div>
+                        <div class="metric-info"><span>On Shift</span><h3>3</h3><div class="metric-trend trend-up">Clocked In</div></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon icon-purple"><i class="fa-solid fa-sitemap"></i></div>
+                        <div class="metric-info"><span>Departments</span><h3>4</h3><div class="metric-trend">Operational</div></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-row-1">
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Employee Directory</div></div>
+                        <div class="table-responsive">
+                            <table id="staff-table">
+                                <thead>
+                                    <tr><th>Staff ID</th><th>Name Profile</th><th>Department</th><th>Contact Line</th><th>Shift Time</th><th>Status</th><th>Actions</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><div class="card-title">Onboard Personnel</div></div>
+                        <form id="staffForm" onsubmit="handleStaffSubmit(event)" style="display: flex; flex-direction: column; gap: 12px;">
+                            <div class="form-group"><label>Full Name</label><input type="text" id="staffName" placeholder="Jane Doe" required></div>
+                            <div class="form-group">
+                                <label>Department Branch</label>
+                                <select id="staffDept">
+                                    <option value="Front Desk">Front Desk Administration</option>
+                                    <option value="Housekeeping">Housekeeping Operations</option>
+                                    <option value="Management">Corporate Management</option>
+                                    <option value="Maintenance">Engineering &amp; Maintenance</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Phone Contact</label><input type="tel" id="staffPhone" placeholder="555-0199" required></div>
+                            <div class="form-group">
+                                <label>Assigned Shift Schedule</label>
+                                <select id="staffShift">
+                                    <option value="Morning (06 AM - 02 PM)">Morning Slot</option>
+                                    <option value="Evening (02 PM - 10 PM)">Evening Slot</option>
+                                    <option value="Night (10 PM - 06 AM)">Night Shift</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 8px; padding: 10px;">Register Employee</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings-tab" class="tab-content">
+                <form id="settingsForm" class="form-card" onsubmit="saveSystemSettings(event)">
+                    <div class="section-heading"><i class="fa-solid fa-hotel"></i> Property Profile Details</div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Property Name</label><input type="text" id="setHotelName" value="HotelTrackPro" required></div>
+                        <div class="form-group"><label>Tagline Subtext</label><input type="text" id="setHotelSub" value="Hotel Performance Solutions" required></div>
+                        <div class="form-group"><label>Primary Support Email</label><input type="email" id="setHotelEmail" value="management@hoteltrackpro.com" required></div>
+                    </div>
+
+                    <div class="section-heading"><i class="fa-solid fa-earth-americas"></i> Regionalization & Localization</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>System Base Currency Symbol</label>
+                            <select id="setCurrency">
+                                <option value="$" selected>USD ($)</option>
+                                <option value="₹">INR (₹)</option>
+                                <option value="€">EUR (€)</option>
+                                <option value="£">GBP (£)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>System Timezone Selection</label>
+                            <select>
+                                <option>GMT +5:30 (IST)</option>
+                                <option selected>GMT -5:00 (EST)</option>
+                                <option>GMT +0:00 (UTC)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="section-heading"><i class="fa-solid fa-sliders"></i> Engine Rules & Automations</div>
+                    <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="form-group">
+                            <label>Automated Transactions Purge</label>
+                            <div class="toggle-container">
+                                <label class="switch">
+                                    <input type="checkbox" id="setAutoPurge">
+                                    <span class="slider"></span>
+                                </label>
+                                <span style="font-size: 13px; color: var(--text-muted)">Clear logs older than 180 days</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>System Maintenance Status</label>
+                            <div class="toggle-container">
+                                <label class="switch">
+                                    <input type="checkbox" id="setMaintMode">
+                                    <span class="slider"></span>
+                                </label>
+                                <span style="font-size: 13px; color: var(--text-muted)">Restrict external public API connections</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Commit Configurations</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="upi-modal-overlay" id="upiModal">
+        <div class="upi-modal-card">
+            <div style="font-weight:600; font-size:16px; margin-bottom:10px;">Scan QR Code to Pay</div>
+            <div class="upi-amount" id="upiModalAmount">$0.00</div>
+            <div class="qr-placeholder">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=hoteltrackpro@bank" alt="UPI QR Code">
+            </div>
+            <div class="upi-apps-icons"><i class="fa-solid fa-mobile-screen-button"></i> Supported apps: GPay, PhonePe, Paytm</div>
+            <div class="upi-status-waiting"><i class="fa-solid fa-circle-notch spinner"></i> Waiting for verification...</div>
+            <button class="btn btn-secondary" style="width: 100%; padding: 8px 0;" onclick="closeUpiModal(false)">Cancel Payment</button>
+        </div>
+    </div>
+
+    <script>
+        let currentCurrency = "$";
+        let pendingRecord = null;
+        let authMode = "existing";
+
+        const fallbackUsers = { "admin": { pass: "admin", name: "Hotel Admin" } };
+        if (!localStorage.getItem('system_auth_users')) {
+            localStorage.setItem('system_auth_users', JSON.stringify(fallbackUsers));
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('isAuthenticated') === 'true') { 
+                showDashboard(); 
+            } else {
+                navigateToHomeScreen();
+            }
+            loadStoredSettings();
+        });
+
+        function navigateToHomeScreen() {
+            document.getElementById('dashboardLayout').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('homePageView').style.display = 'flex';
+        }
+
+        function navigateToAuthScreen() {
+            document.getElementById('homePageView').style.display = 'none';
+            document.getElementById('dashboardLayout').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            setAuthMode('existing');
+        }
+
+        function setAuthMode(mode) {
+            authMode = mode;
+            const loginBtn = document.getElementById('toggleLoginMode');
+            const regBtn = document.getElementById('toggleRegisterMode');
+            const fullNameGroup = document.getElementById('regFullNameGroup');
+            const subtitle = document.getElementById('authPanelSubtitle');
+            const submitBtn = document.getElementById('authSubmitBtn');
+
+            if (mode === 'new') {
+                loginBtn.classList.remove('active');
+                regBtn.classList.add('active');
+                fullNameGroup.style.display = 'block';
+                subtitle.innerText = 'Register System Operator Workspace';
+                submitBtn.innerText = 'Create Account & Log In';
+                document.getElementById('loginUser').value = '';
+                document.getElementById('loginPass').value = '';
+            } else {
+                regBtn.classList.remove('active');
+                loginBtn.classList.add('active');
+                fullNameGroup.style.display = 'none';
+                subtitle.innerText = 'System Administration Terminal';
+                submitBtn.innerText = 'Secure Authenticate';
+                document.getElementById('loginUser').value = 'admin';
+                document.getElementById('loginPass').value = 'admin';
+            }
+        }
+
+        function handleAuthEngine(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('loginUser').value.trim();
+            const passwordInput = document.getElementById('loginPass').value;
+            const users = JSON.parse(localStorage.getItem('system_auth_users'));
+
+            if (authMode === 'new') {
+                const fullNameInput = document.getElementById('regFullName').value.trim() || 'New Operator';
+                if (!usernameInput || !passwordInput) {
+                    alert('Please provide valid registration parameters.');
+                    return;
+                }
+                if (users[usernameInput]) {
+                    alert('This username/email is already taken.');
+                    return;
+                }
+                users[usernameInput] = { pass: passwordInput, name: fullNameInput };
+                localStorage.setItem('system_auth_users', JSON.stringify(users));
+                sessionStorage.setItem('currentUserName', fullNameInput);
+                sessionStorage.setItem('isAuthenticated', 'true');
+                showDashboard();
+            } else {
+                if (users[usernameInput] && users[usernameInput].pass === passwordInput) {
+                    sessionStorage.setItem('currentUserName', users[usernameInput].name);
+                    sessionStorage.setItem('isAuthenticated', 'true');
+                    showDashboard();
+                } else {
+                    alert('Authentication failed. Invalid login credentials.');
+                }
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('isAuthenticated');
+            sessionStorage.removeItem('currentUserName');
+            navigateToHomeScreen();
+        }
+
+        function showDashboard() {
+            document.getElementById('homePageView').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboardLayout').style.display = 'flex';
+            
+            const sessionName = sessionStorage.getItem('currentUserName') || 'Hotel Admin';
+            document.getElementById('navUserProfileName').innerText = sessionName;
+            document.getElementById('navAvatarInitials').innerText = sessionName.substring(0, 2).toUpperCase();
+
+            refreshAllDataViews();
+            initializeCharts();
+        }
+
+        function refreshAllDataViews() {
+            renderTransactionsTable();
+            renderReservationsTable();
+            renderGlobalLedgerTable();
+            renderStaffTable();
+            renderGuestsTable();
+            renderRoomsMatrix();
+            
+            document.querySelectorAll('.tab-content.active .card, .tab-content.active .metric-card').forEach(block => {
+                block.style.animation = 'none';
+                block.offsetHeight;
+                block.style.animation = null;
+            });
+        }
+
+        const fallbackDatabase = [
+            { id: "TRX1004", guestName: "Sarah Davis", email: "sarah.d@example.com", phone: "555-0122", type: "Deluxe Suite", amount: 200.00, time: "01:05 PM", payment: "Card", status: "Completed", checkin: "2026-05-20", checkout: "2026-05-25" },
+            { id: "TRX1003", guestName: "Michael Brown", email: "mbrown@example.org", phone: "555-0143", type: "Spa & Dinner package", amount: 35.00, time: "12:15 PM", payment: "Cash", status: "Completed", checkin: "2026-05-19", checkout: "2026-05-20" },
+            { id: "TRX1002", guestName: "Emily Johnson", email: "emily.j@corporate.com", phone: "555-0189", type: "Executive Room", amount: 150.00, time: "11:20 AM", Point: "Card", status: "Completed", checkin: "2026-05-21", checkout: "2026-05-23" },
+            { id: "TRX1001", guestName: "John Smith", email: "john.smith@example.com", phone: "555-0111", type: "Executive Room", amount: 120.00, time: "10:30 AM", payment: "Cash", status: "Completed", checkin: "2026-05-18", checkout: "2026-05-20" }
+        ];
+
+        const fallbackStaff = [
+            { id: "EMP301", name: "David Miller", dept: "Management", phone: "+1 555-0144", shift: "Morning (06 AM - 02 PM)", status: "Active" },
+            { id: "EMP302", name: "Sarah Jenkins", dept: "Front Desk", phone: "+1 555-0172", shift: "Morning (06 AM - 02 PM)", status: "Active" },
+            { id: "EMP303", name: "Robert Porter", dept: "Housekeeping", phone: "+1 555-0129", shift: "Evening (02 PM - 10 PM)", status: "Active" },
+            { id: "EMP304", name: "Elena Rostova", dept: "Maintenance", phone: "+1 555-0188", shift: "Night (10 PM - 06 AM)", status: "Off Duty" }
+        ];
+
+        const fallbackRooms = [
+            { roomNum: "101", type: "Executive Room", status: "Occupied", hsk: "Clean" },
+            { roomNum: "102", type: "Executive Room", status: "Available", hsk: "Clean" },
+            { roomNum: "103", type: "Executive Room", status: "Occupied", hsk: "Dirty" },
+            { roomNum: "201", type: "Deluxe Suite", status: "Available", hsk: "Clean" },
+            { roomNum: "202", type: "Deluxe Suite", status: "Reserved", hsk: "Clean" },
+            { roomNum: "203", type: "Deluxe Suite", status: "Occupied", hsk: "Dirty" },
+            { roomNum: "301", type: "Spa & Dinner package", status: "Available", hsk: "Clean" },
+            { roomNum: "302", type: "Spa & Dinner package", status: "Maintenance", hsk: "Clean" }
+        ];
+
+        if (!localStorage.getItem('hotel_transactions')) localStorage.setItem('hotel_transactions', JSON.stringify(fallbackDatabase));
+        if (!localStorage.getItem('hotel_staff')) localStorage.setItem('hotel_staff', JSON.stringify(fallbackStaff));
+        if (!localStorage.getItem('hotel_rooms')) localStorage.setItem('hotel_rooms', JSON.stringify(fallbackRooms));
+
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            el.classList.add('active');
+            
+            const titleMap = {
+                'dashboard-tab': 'Dashboard Overview',
+                'booking-tab': 'Create New Reservation',
+                'reservations-tab': 'Master Reservation Database',
+                'guests-tab': 'Guest Relations Profile Directory',
+                'rooms-tab': 'Rooms Management & Housekeeping Matrix',
+                'transactions-tab': 'Global Transaction Ledger',
+                'reports-tab': 'Management & Financial Reports',
+                'staff-tab': 'Human Resources & Rota Control',
+                'settings-tab': 'System Configuration Control'
+            };
+            if(titleMap[tabId]) document.getElementById('dynamic-title').innerText = titleMap[tabId];
+            
+            refreshAllDataViews();
+            if (tabId === 'reports-tab') initializeReportsChart();
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('bookingAmount').value) || 0;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            const nextIndex = transactions.length > 0 ? parseInt(transactions[0].id.replace("TRX", "")) + 1 : 1001;
+            const newId = "TRX" + nextIndex;
+
+            pendingRecord = {
+                id: newId,
+                guestName: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                type: document.getElementById('roomType').value,
+                amount: amount,
+                time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                payment: paymentMethod,
+                status: document.getElementById('bookingStatus').value,
+                checkin: document.getElementById('checkInDate').value || 'N/A',
+                checkout: document.getElementById('checkOutDate').value || 'N/A'
+            };
+
+            if (paymentMethod === "UPI QR") {
+                document.getElementById('upiModalAmount').innerText = `${currentCurrency}${amount.toFixed(2)}`;
+                document.getElementById('upiModal').style.display = "flex";
+                setTimeout(() => { if (pendingRecord) closeUpiModal(true); }, 4000);
+            } else {
+                savePendingRecord();
+            }
+        }
+
+        function closeUpiModal(isSuccess) {
+            document.getElementById('upiModal').style.display = "none";
+            if (isSuccess && pendingRecord) {
+                pendingRecord.status = "Completed";
+                savePendingRecord();
+            } else {
+                pendingRecord = null;
+                alert("Payment timed out.");
+            }
+        }
+
+        function savePendingRecord() {
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            transactions.unshift(pendingRecord);
+            localStorage.setItem('hotel_transactions', JSON.stringify(transactions));
+            alert(`Success! Reservation compiled securely into system ID: ${pendingRecord.id}`);
+            pendingRecord = null;
+            document.getElementById('bookingForm').reset();
+            switchTab('transactions-tab', document.querySelectorAll('.nav-menu .nav-item')[5]);
+        }
+
+        function renderTransactionsTable() {
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            const tbody = document.querySelector('#transactions-table tbody');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+
+            transactions.slice(0, 5).forEach(row => { 
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.id}</td>
+                    <td><b>${row.guestName}</b></td>
+                    <td>${row.type}</td>
+                    <td>${currentCurrency}${row.amount.toFixed(2)}</td>
+                    <td>${row.time}</td>
+                    <td>${row.payment}</td>
+                    <td><span class="status-badge" style="background-color: ${row.status === 'Completed' ? '#D1FAE5':'#FEF3C7'}; color: ${row.status === 'Completed' ? '#065F46':'#92400E'}">${row.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            let totalRevCalculated = 4075;
+            transactions.forEach(r => { if(r.status === 'Completed') totalRevCalculated += r.amount; });
+            document.getElementById('stat-revenue').innerText = `${currentCurrency}${totalRevCalculated.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('summary-revenue').innerText = `${currentCurrency}${totalRevCalculated.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('stat-bookings').innerText = transactions.length + 8;
+            document.getElementById('summary-bookings').innerText = transactions.length + 8;
+        }
+
+        function renderReservationsTable() {
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            const tbody = document.querySelector('#master-reservations-table tbody');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+
+            transactions.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="status-badge" style="background-color:#E2E8F0; color:#1C2434">${row.id}</span></td>
+                    <td><b>${row.guestName}</b></td>
+                    <td><i class="fa-solid fa-bed" style="color:var(--primary-blue)"></i> ${row.type}</td>
+                    <td><input type="date" value="${row.checkin || ''}" disabled style="padding:2px; border:none; background:none; font-size:13px;"></td>
+                    <td><input type="date" value="${row.checkout || ''}" disabled style="padding:2px; border:none; background:none; font-size:13px;"></td>
+                    <td><b>${currentCurrency}${row.amount.toFixed(2)}</b></td>
+                    <td><span class="status-badge" style="background-color:#E0F2FE; color:#0369A1">${row.payment}</span></td>
+                    <td><button class="delete-btn" onclick="deleteReservation(${index})"><i class="fa-solid fa-trash-can"></i></button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function renderGlobalLedgerTable() {
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            const tbody = document.querySelector('#global-ledger-table tbody');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+
+            let gross = 4075; let cash = 155; let digital = 3920; let pending = 0;
+            transactions.forEach(row => {
+                const tr = document.createElement('tr');
+                const isComp = row.status === 'Completed';
+                if (isComp) {
+                    gross += row.amount;
+                    if(row.payment === 'Cash') cash += row.amount; else digital += row.amount;
+                } else { pending += row.amount; }
+
+                tr.innerHTML = `
+                    <td><b>${row.id}</b></td>
+                    <td>${row.guestName}</td>
+                    <td>${row.type}</td>
+                    <td><span class="status-badge" style="background-color:#F1F5F9; color:#475569">${row.payment}</span></td>
+                    <td>${row.time}</td>
+                    <td><b>${currentCurrency}${row.amount.toFixed(2)}</b></td>
+                    <td><span class="status-badge" style="background-color: ${isComp ? '#D1FAE5':'#FEF3C7'}; color: ${isComp ? '#065F46':'#92400E'}">${row.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('ledger-gross').innerText = `${currentCurrency}${gross.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('ledger-cash').innerText = `${currentCurrency}${cash.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('ledger-digital').innerText = `${currentCurrency}${digital.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+            document.getElementById('ledger-pending').innerText = `$${pending.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+        }
+
+        function deleteReservation(index) {
+            if(confirm("Are you sure you want to cancel this booking?")) {
+                const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+                transactions.splice(index, 1);
+                localStorage.setItem('hotel_transactions', JSON.stringify(transactions));
+                refreshAllDataViews();
+            }
+        }
+
+        function renderGuestsTable() {
+            const transactions = JSON.parse(localStorage.getItem('hotel_transactions'));
+            const tbody = document.querySelector('#guests-directory-table tbody');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+
+            const guestMap = {};
+            transactions.forEach(t => {
+                if(!guestMap[t.guestName]) {
+                    guestMap[t.guestName] = { email: t.email || 'N/A', phone: t.phone || 'N/A', count: 0 };
+                }
+                guestMap[t.guestName].count++;
+            });
+
+            let index = 1;
+            Object.keys(guestMap).forEach(name => {
+                const tr = document.createElement('tr');
+                const tier = index === 1 ? 'VIP Premium' : (index % 2 === 0 ? 'Corporate' : 'Standard');
+                const bg = tier === 'VIP Premium' ? '#FEF3C7' : (tier === 'Corporate' ? '#E0F2FE' : '#F1F5F9');
+                const co = tier === 'VIP Premium' ? '#D97706' : (tier === 'Corporate' ? '#0369A1' : '#475569');
+
+                tr.innerHTML = `
+                    <td><span class="status-badge" style="background-color:#E2E8F0; color:#1C2434">GST-${1000 + index}</span></td>
+                    <td><b>${name}</b></td>
+                    <td>${guestMap[name].email}</td>
+                    <td>${guestMap[name].phone}</td>
+                    <td><span class="status-badge" style="background-color:#E2E8F0;">${guestMap[name].count} Rsv</span></td>
+                    <td><span class="status-badge" style="background-color:${bg}; color:${co}">${tier}</span></td>
+                `;
+                tbody.appendChild(tr);
+                index++;
+            });
+            document.getElementById('guest-total-card').innerText = Object.keys(guestMap).length;
+        }
+
+        function renderRoomsMatrix() {
+            const rooms = JSON.parse(localStorage.getItem('hotel_rooms'));
+            const container = document.getElementById('property-rooms-matrix');
+            const selectDropdown = document.getElementById('hsk-room-select');
+            if(!container) return;
+
+            container.innerHTML = "";
+            selectDropdown.innerHTML = "";
+            let cleanCount = 0; let dirtyCount = 0;
+
+            rooms.forEach(rm => {
+                if(rm.hsk === 'Clean') cleanCount++; else dirtyCount++;
+                const statusColors = {
+                    'Occupied': { bg: '#DBEAFE', co: '#1E40AF' },
+                    'Available': { bg: '#D1FAE5', co: '#065F46' },
+                    'Reserved': { bg: '#FEF3C7', co: '#92400E' },
+                    'Maintenance': { bg: '#FEE2E2', co: '#991B1B' }
+                };
+                const color = statusColors[rm.status] || { bg: '#F1F5F9', co: '#475569' };
+                const dotColor = rm.hsk === 'Clean' ? '#10B981' : '#EF4444';
+
+                const block = document.createElement('div');
+                block.className = 'room-block';
+                block.innerHTML = `
+                    <div class="hsk-dot" style="background-color: ${dotColor}"></div>
+                    <div class="room-number">${rm.roomNum}</div>
+                    <div class="room-class">${rm.type.split('&')[0]}</div>
+                    <span class="room-badge" style="background-color:${color.bg}; color:${color.co}">${rm.status}</span>
+                `;
+                container.appendChild(block);
+
+                const opt = document.createElement('option');
+                opt.value = rm.roomNum;
+                opt.innerText = `Room Unit ${rm.roomNum} (${rm.hsk})`;
+                selectDropdown.appendChild(opt);
+            });
+            document.getElementById('hsk-clean-count').innerText = cleanCount;
+            document.getElementById('hsk-dirty-count').innerText = dirtyCount;
+        }
+
+        function modifyHousekeepingState() {
+            const targetRoomNum = document.getElementById('hsk-room-select').value;
+            const newState = document.getElementById('hsk-state-select').value;
+            const rooms = JSON.parse(localStorage.getItem('hotel_rooms'));
+
+            const idx = rooms.findIndex(r => r.roomNum === targetRoomNum);
+            if(idx !== -1) {
+                rooms[idx].hsk = newState;
+                localStorage.setItem('hotel_rooms', JSON.stringify(rooms));
+                renderRoomsMatrix();
+                alert(`Unit ${targetRoomNum} status updated.`);
+            }
+        }
+
+        function handleStaffSubmit(event) {
+            event.preventDefault();
+            const staffList = JSON.parse(localStorage.getItem('hotel_staff'));
+            const nextIdx = staffList.length > 0 ? parseInt(staffList[staffList.length - 1].id.replace("EMP", "")) + 1 : 301;
+            
+            const newStaff = {
+                id: "EMP" + nextIdx,
+                name: document.getElementById('staffName').value,
+                dept: document.getElementById('staffDept').value,
+                phone: document.getElementById('staffPhone').value,
+                shift: document.getElementById('staffShift').value,
+                status: "Active"
+            };
+            staffList.push(newStaff);
+            localStorage.setItem('hotel_staff', JSON.stringify(staffList));
+            document.getElementById('staffForm').reset();
+            renderStaffTable();
+            alert(`Staff registered under ${newStaff.id}`);
+        }
+
+        function renderStaffTable() {
+            const staffList = JSON.parse(localStorage.getItem('hotel_staff'));
+            const tbody = document.querySelector('#staff-table tbody');
+            if(!tbody) return;
+            tbody.innerHTML = "";
+
+            staffList.forEach((emp, index) => {
+                const tr = document.createElement('tr');
+                const isActive = emp.status === 'Active';
+                tr.innerHTML = `
+                    <td><span class="status-badge" style="background-color:#E2E8F0; color:#1C2434">${emp.id}</span></td>
+                    <td><b>${emp.name}</b></td>
+                    <td><i class="fa-solid fa-briefcase" style="color:var(--text-muted); font-size:12px;"></i> ${emp.dept}</td>
+                    <td>${emp.phone}</td>
+                    <td><span style="font-size:12px; font-weight:500;">${emp.shift}</span></td>
+                    <td><span class="status-badge" style="background-color: ${isActive ? '#D1FAE5':'#E2E8F0'}; color: ${isActive ? '#065F46':'#475569'}">${emp.status}</span></td>
+                    <td><button class="delete-btn" onclick="fireStaff(${index})"><i class="fa-solid fa-user-minus"></i></button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById('staff-count-card').innerText = staffList.length;
+        }
+
+        function fireStaff(index) {
+            if(confirm("Remove this staff member from directory?")) {
+                const staffList = JSON.parse(localStorage.getItem('hotel_staff'));
+                staffList.splice(index, 1);
+                localStorage.setItem('hotel_staff', JSON.stringify(staffList));
+                renderStaffTable();
+            }
+        }
+
+        function handleGlobalSearch(val) {
+            const query = val.toLowerCase();
+            document.querySelectorAll("table tbody tr").forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none";
+            });
+        }
+
+        function saveSystemSettings(event) {
+            event.preventDefault();
+            const configObj = {
+                name: document.getElementById('setHotelName').value,
+                sub: document.getElementById('setHotelSub').value,
+                curr: document.getElementById('setCurrency').value,
+                purge: document.getElementById('setAutoPurge').checked,
+                maint: document.getElementById('setMaintMode').checked
+            };
+            localStorage.setItem('h_system_config', JSON.stringify(configObj));
+            loadStoredSettings();
+            alert("Settings saved successfully!");
+            switchTab('dashboard-tab', document.querySelectorAll('.nav-menu .nav-item')[0]);
+        }
+
+        function loadStoredSettings() {
+            const stored = localStorage.getItem('h_system_config');
+            if (!stored) return;
+            const parsed = JSON.parse(stored);
+            document.getElementById('setHotelName').value = parsed.name;
+            document.getElementById('setHotelSub').value = parsed.sub;
+            document.getElementById('setCurrency').value = parsed.curr;
+            document.getElementById('setAutoPurge').checked = parsed.purge;
+            document.getElementById('setMaintMode').checked = parsed.maint;
+            currentCurrency = parsed.curr;
+            document.getElementById('sidebar-sub-lbl').innerText = parsed.sub;
+        }
+
+        let revChartInstance = null; let roomChartInstance = null;
+        let monthlyReportChartInstance = null; let revenueDistributionChartInstance = null;
+
+        function initializeCharts() {
+            if(revChartInstance || roomChartInstance) return;
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            revChartInstance = new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    datasets: [{
+                        data: [2820, 3540, 4120, 3870, 4560, 5230, 4680],
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.05)',
+                        tension: 0.3, fill: true, pointBackgroundColor: '#3B82F6'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            const ctxRoom = document.getElementById('roomChart').getContext('2d');
+            roomChartInstance = new Chart(ctxRoom, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [34, 11, 3, 2],
+                        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { cutout: '70%', responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function initializeReportsChart() {
+            if(monthlyReportChartInstance || revenueDistributionChartInstance) return;
+            const ctxMonthly = document.getElementById('monthlyReportChart').getContext('2d');
+            monthlyReportChartInstance = new Chart(ctxMonthly, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Gross Income',
+                        data: [12400, 14500, 11200, 16800, 19450],
+                        backgroundColor: '#0A369D',
+                        borderRadius: 6
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+
+            const ctxDist = document.getElementById('revenueDistributionChart').getContext('2d');
+            revenueDistributionChartInstance = new Chart(ctxDist, {
+                type: 'pie',
+                data: {
+                    labels: ['Rooms', 'Amenities'],
+                    datasets: [{
+                        data: [82, 18],
+                        backgroundColor: ['#3B82F6', '#8B5CF6']
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+    </script>
+</body>
+</html>
